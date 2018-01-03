@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
 			@Override
 			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-				viewModel.getMessageList().removeObservers(MainActivity.this);
+				//viewModel.getMessageList().removeObservers(MainActivity.this);
 				viewModel.setSearchString(charSequence.toString());
 			}
 
@@ -91,28 +91,6 @@ public class MainActivity extends AppCompatActivity {
 
 			}
 		} );
-//		search.setOnKeyListener(new View.OnKeyListener() {
-//			@Override
-//			public boolean onKey(View view, int i, KeyEvent keyEvent) {
-//				EditText search = (EditText)view;
-//				String text = search.getText().toString();
-//				if (! text.equals(mLastText)) {
-//
-//				}
-//				return false;
-//			}
-//		});
-
-//		mDatabase = Room.databaseBuilder(
-//				getApplicationContext(),
-//				MyDatabase.class,
-//				"myDatabase").build();
-//
-//		if (mDatabase.messageDao().countAll() == 0) {
-//			for (int i = 0; i < 50; i++) {
-//				mDatabase.messageDao().insert(MessageUtil.getRandom());
-//			}
-//		}
 
 		//MyViewModel viewModel = ViewModelProviders.of(this).get(MyViewModel.class);
 		viewModel = ViewModelProviders.of(this).get(MyViewModel.class);
@@ -127,7 +105,13 @@ public class MainActivity extends AppCompatActivity {
 		viewModel.getSearchString().observe(this, new Observer<String>() {
 			@Override
 			public void onChanged(@Nullable String s) {
-				viewModel.getMessageList().observe(MainActivity.this, new Observer<PagedList<Message>>() {
+//				viewModel.getMessageList().observe(MainActivity.this, new Observer<PagedList<Message>>() {
+//					@Override
+//					public void onChanged(@Nullable PagedList<Message> messages) {
+//						mAdapter.setList(messages);
+//					}
+//				});
+				viewModel.observeMessageList(MainActivity.this, new Observer<PagedList<Message>>() {
 					@Override
 					public void onChanged(@Nullable PagedList<Message> messages) {
 						mAdapter.setList(messages);
@@ -136,19 +120,20 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
-		viewModel.getMessageList().observe(MainActivity.this, new Observer<PagedList<Message>>() {
+//		viewModel.getMessageList().observe(MainActivity.this, new Observer<PagedList<Message>>() {
+//			@Override
+//			public void onChanged(@Nullable PagedList<Message> messages) {
+//				mAdapter.setList(messages);
+//			}
+//		});
+
+		viewModel.observeMessageList(MainActivity.this, new Observer<PagedList<Message>>() {
 			@Override
 			public void onChanged(@Nullable PagedList<Message> messages) {
 				mAdapter.setList(messages);
 			}
 		});
 
-//		viewModel.messagesList.observe(this, new Observer<PagedList<Message>>() {
-//			@Override
-//			public void onChanged(@Nullable PagedList<Message> messages) {
-//				mAdapter.setList(messages);
-//			}
-//		});
 
 		recyclerView.setAdapter(mAdapter);
 		LinearLayoutManager llm = new LinearLayoutManager(this);
