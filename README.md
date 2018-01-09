@@ -9,4 +9,7 @@ This is a simple app I wrote to test the following Architecture Components:
 
 This sample all also support query filtering as the user enter search text.
 
-Filtering is made by switching `PagedList` as the query filter changes.
+Filtering is made by creating a new filtered `PagedList` that replace the previous
+as the query filter changes.
+
+Switching `PagedList`s are contained by a `MediatorLiveData`.

@@ -42,18 +42,6 @@ public class RemoteTestApp extends Application {
 				}
 			}.execute();
 			preferences.edit().putBoolean(KEY_IS_DB_POPULATED, true).apply();
-		} else {
-			new AsyncTask<Void, Void, Void>() {
-
-				@Override
-				protected Void doInBackground(Void... voids) {
-					//for (int i = 0; i < 50; i++) {
-						int asd = MyDatabase.getInstance(context).messageDao().countAll();
-						asd = asd + 1;
-					//}
-					return null;
-				}
-			}.execute();
 		}
 	}
 
