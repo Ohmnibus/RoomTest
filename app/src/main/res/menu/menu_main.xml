@@ -2,9 +2,14 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	tools:context="it.almaviva.roomtestapp.MainActivity">
+	<!--<item-->
+		<!--android:id="@+id/action_settings"-->
+		<!--android:orderInCategory="100"-->
+		<!--android:title="@string/action_settings"-->
+		<!--app:showAsAction="never" />-->
 	<item
-		android:id="@+id/action_settings"
+		android:id="@+id/action_observe"
 		android:orderInCategory="100"
-		android:title="@string/action_settings"
+		android:title="@string/action_observe"
 		app:showAsAction="never" />
 </menu>

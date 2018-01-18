@@ -1,7 +1,5 @@
 package it.almaviva.roomtestapp.viewModel;
 
-import android.arch.lifecycle.ComputableLiveData;
-import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -9,10 +7,8 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.paging.DataSource;
 import android.arch.paging.LivePagedListBuilder;
-import android.arch.paging.LivePagedListProvider;
 import android.arch.paging.PagedList;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import it.almaviva.roomtestapp.RemoteTestApp;
@@ -40,6 +36,7 @@ public class MyViewModel extends ViewModel {
 		mCurrentFilteredMessagesList = null;
 		mFilteredMessageList = new MediatorLiveData<>();
 		mFilteredMessageList.setValue(null);
+
 		refreshFilteredMessage();
 	}
 
@@ -71,15 +68,15 @@ public class MyViewModel extends ViewModel {
 		return searchText;
 	}
 
-	public void insertUser(final Message msg) {
-		new InsertUserTask(mMessageDao).execute(msg);
+	public void insertMessage(final Message msg) {
+		new InsertMessageTask(mMessageDao).execute(msg);
 	}
 
-	private static class InsertUserTask extends AsyncTask<Message, Void, Void> {
+	private static class InsertMessageTask extends AsyncTask<Message, Void, Void> {
 
 		MessageDao mMessageDao;
 
-		public InsertUserTask(MessageDao messageDao) {
+		public InsertMessageTask(MessageDao messageDao) {
 			mMessageDao = messageDao;
 		}
 
